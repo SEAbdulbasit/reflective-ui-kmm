@@ -40,6 +40,10 @@ kotlin {
                 api("androidx.activity:activity-compose:1.6.1")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.9.0")
+                implementation("androidx.camera:camera-camera2:1.2.2")
+                implementation("androidx.camera:camera-lifecycle:1.2.2")
+                implementation("androidx.camera:camera-view:1.2.2")
+                implementation("com.google.accompanist:accompanist-permissions:0.29.2-rc")
             }
         }
         val iosX64Main by getting
