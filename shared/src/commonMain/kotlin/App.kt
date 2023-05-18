@@ -1,57 +1,80 @@
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
     MaterialTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             CameraView(modifier = Modifier.fillMaxSize())
-            Canvas(modifier = Modifier.fillMaxSize()) {
-                drawRect(
-                    color = Color.Black,
-                    size = size
-                )
+            Box(modifier = Modifier.fillMaxSize().background(Color.Black))
+            Column(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    TransparentText(
+                        text = "Contacts",
+                        height = 60,
+                        textStyle = TextStyle(fontWeight = FontWeight.W600, fontSize = 36.sp)
+                    )
+                }
+                LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                    items(
+                        userDetails
+                    ) {
+                        UserListTile(it)
+                    }
+                }
             }
-            TransparentBox(modifier = Modifier.align(alignment = Alignment.Center))
         }
     }
 }
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
-fun TransparentBox(modifier: Modifier = Modifier) {
-    val transparentBoxSize = 60.dp
-
-    Canvas(modifier = modifier) {
-        drawRect(
-            color = Color.Red, // Specify the desired transparency here
-            size = Size(transparentBoxSize.toPx(), transparentBoxSize.toPx()),
+fun TransparentText(text: String, textStyle: TextStyle, height: Int = 25) {
+    val textMeasure = rememberTextMeasurer()
+    Canvas(modifier = Modifier.fillMaxWidth().height(height = height.dp), onDraw = {
+        drawText(
+            textMeasurer = textMeasure,
+            text = text,
+            style = textStyle,
             blendMode = BlendMode.Clear
+        )
+    })
+}
+
+@Composable
+fun TransparentCircle() {
+    Canvas(modifier = Modifier.size(25.dp)) {
+        val radius = 25.dp.toPx()
+        drawCircle(
+            color = Color.Transparent, radius = radius, blendMode = BlendMode.Clear
         )
     }
 }
@@ -59,36 +82,36 @@ fun TransparentBox(modifier: Modifier = Modifier) {
 @Composable
 fun UserListTile(user: User) {
     Row(
+        modifier = Modifier.fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box(
-            modifier = Modifier.size(50.dp).clip(CircleShape).background(Color.White)
+        TransparentCircle(
         )
         Spacer(modifier = Modifier.width(10.dp))
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f).padding(start = 16.dp)
         ) {
-            Text(
-                text = user.name, style = TextStyle(
+            TransparentText(
+                text = user.name, textStyle = TextStyle(
                     color = Color.White, fontWeight = FontWeight.W600, fontSize = 18.sp
                 )
             )
-            Text(
-                text = user.username, style = TextStyle(
+            TransparentText(
+                text = user.username, textStyle = TextStyle(
                     color = Color.White, fontWeight = FontWeight.W400, fontSize = 14.sp
                 )
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            imageVector = Icons.Default.ArrowForward,
-            contentDescription = null,
-            tint = Color.White,
-            modifier = Modifier.size(30.dp)
-        )
+//        Spacer(modifier = Modifier.weight(1f))
+//        Icon(
+//            imageVector = Icons.Default.ArrowForward,
+//            contentDescription = null,
+//            tint = Color.White,
+//            modifier = Modifier.size(30.dp)
+//        )
     }
 }
-
 
 data class User(
     val name: String, val username: String
