@@ -1,6 +1,5 @@
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,27 +32,23 @@ fun App() {
         Box(modifier = Modifier.fillMaxSize()) {
             CameraView(modifier = Modifier.fillMaxSize())
             Box(modifier = Modifier.fillMaxSize().background(Color.Black))
-            Column(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    TransparentText(
-                        text = "Contacts",
-                        height = 60,
-                        textStyle = TextStyle(fontWeight = FontWeight.W600, fontSize = 36.sp)
-                    )
-                }
-                LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    items(
-                        userDetails
-                    ) {
-                        UserListTile(it)
+            Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
+                TransparentText(
+                    text = "Contacts",
+                    height = 60,
+                    textStyle = TextStyle(fontWeight = FontWeight.W600, fontSize = 36.sp)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn(modifier = Modifier.weight(1f).fillMaxSize()) {
+                    items(userDetails) { userDetails ->
+                        UserListTile(userDetails)
                     }
                 }
             }
         }
     }
 }
+
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
@@ -83,7 +78,7 @@ fun TransparentCircle() {
 fun UserListTile(user: User) {
     Row(
         modifier = Modifier.fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TransparentCircle(
