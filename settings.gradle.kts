@@ -1,4 +1,4 @@
-rootProject.name = "MyApplication"
+rootProject.name = "Transparent-UI"
 
 include(":androidApp")
 include(":shared")
