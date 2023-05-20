@@ -16,8 +16,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
@@ -56,10 +59,7 @@ fun TransparentText(text: String, textStyle: TextStyle, height: Int = 25) {
     val textMeasure = rememberTextMeasurer()
     Canvas(modifier = Modifier.fillMaxWidth().height(height = height.dp), onDraw = {
         drawText(
-            textMeasurer = textMeasure,
-            text = text,
-            style = textStyle,
-            blendMode = BlendMode.Clear
+            textMeasurer = textMeasure, text = text, style = textStyle, blendMode = BlendMode.Clear
         )
     })
 }
@@ -77,8 +77,7 @@ fun TransparentCircle() {
 @Composable
 fun UserListTile(user: User) {
     Row(
-        modifier = Modifier.fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TransparentCircle(
@@ -98,13 +97,40 @@ fun UserListTile(user: User) {
                 )
             )
         }
-//        Spacer(modifier = Modifier.weight(1f))
-//        Icon(
-//            imageVector = Icons.Default.ArrowForward,
-//            contentDescription = null,
-//            tint = Color.White,
-//            modifier = Modifier.size(30.dp)
-//        )
+        Spacer(modifier = Modifier.weight(1f))
+        CanvasWithIcon()
+    }
+}
+
+@Composable
+fun CanvasWithIcon() {
+    Canvas(modifier = Modifier.size(25.dp)) {
+        val circleRadius = size.minDimension / 2
+        val circleCenter = Offset(size.width / 2, size.height / 2)
+
+        // Draw the circle
+        drawCircle(
+            color = Color.Red,
+            radius = circleRadius,
+            style = Stroke(width = (2.5).dp.toPx()),
+            blendMode = BlendMode.Clear
+        )
+
+        val arrowSize = circleRadius * 0.6f // Adjust the size of the arrow
+        val arrowPath = Path().apply {
+            moveTo(
+                circleCenter.x + circleRadius - arrowSize,
+                circleCenter.y
+            ) // Start from the adjusted position
+            lineTo(circleCenter.x + circleRadius - arrowSize * 2, circleCenter.y - arrowSize / 2)
+            lineTo(circleCenter.x + circleRadius - arrowSize * 2, circleCenter.y + arrowSize / 2)
+            close()
+        }
+        drawPath(
+            path = arrowPath,
+            color = Color.White,
+            blendMode = BlendMode.Clear
+        )
     }
 }
 
