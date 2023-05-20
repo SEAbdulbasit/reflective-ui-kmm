@@ -116,19 +116,19 @@ fun CanvasWithIcon() {
             blendMode = BlendMode.Clear
         )
 
-        val arrowSize = circleRadius * 0.6f // Adjust the size of the arrow
+        val arrowWidth = circleRadius * 0.6f
+        val arrowHeight = circleRadius * 0.4f
         val arrowPath = Path().apply {
-            moveTo(
-                circleCenter.x + circleRadius - arrowSize,
-                circleCenter.y
-            ) // Start from the adjusted position
-            lineTo(circleCenter.x + circleRadius - arrowSize * 2, circleCenter.y - arrowSize / 2)
-            lineTo(circleCenter.x + circleRadius - arrowSize * 2, circleCenter.y + arrowSize / 2)
-            close()
+            moveTo(circleCenter.x - arrowWidth / 2, circleCenter.y - arrowHeight / 2)
+            lineTo(circleCenter.x + arrowWidth / 2, circleCenter.y)
+            lineTo(circleCenter.x - arrowWidth / 2, circleCenter.y + arrowHeight / 2)
+            moveTo(circleCenter.x + arrowWidth / 2, circleCenter.y)
+            lineTo(circleCenter.x - arrowWidth / 2 + arrowHeight / 2, circleCenter.y)
         }
         drawPath(
             path = arrowPath,
             color = Color.White,
+            style = Stroke(width = (2.5).dp.toPx()),
             blendMode = BlendMode.Clear
         )
     }
