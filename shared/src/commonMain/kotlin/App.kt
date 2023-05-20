@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,7 +49,7 @@ fun App() {
                     .background(backgroundColor.value)
             )
 
-            Column(modifier = Modifier.padding(16.dp).fillMaxSize()) {
+            Column(modifier = Modifier.padding(16.dp).fillMaxWidth().fillMaxHeight()) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -185,7 +186,6 @@ fun UserListTile(user: User) {
                 )
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
         CanvasWithIcon()
     }
 }
