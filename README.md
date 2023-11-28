@@ -1,5 +1,8 @@
 # Transparent UI KMM
 
+<a href="https://www.buymeacoffee.com/seabdulbasit" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+
 > **Note**
 > This project is a work in progress. The current implementation uses Canvas in Compose Multiplatform to draw transparent circles and text. However, this may not be the most optimal solution. Alternative approaches and contributions are welcome.
 
