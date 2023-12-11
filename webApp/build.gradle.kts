@@ -18,10 +18,9 @@ afterEvaluate {
 
 kotlin {
     wasmJs {
-        moduleName = "transparent_ui"
+        moduleName = "reflective-ui-kmm"
         browser {
             commonWebpackConfig {
-                outputFileName = "transparent_ui.js"
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     static = (static ?: mutableListOf()).apply {
                         // Serve sources to debug inside browser
@@ -39,12 +38,15 @@ kotlin {
     sourceSets {
         val wasmJsMain by getting {
             dependencies {
-                api(compose.runtime)
-                api(compose.ui)
-                api(compose.foundation)
-                api(compose.material)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                api(compose.components.resources)
+                dependencies {
+                    implementation(project(":shared"))
+                    implementation(compose.runtime)
+                    implementation(compose.ui)
+                    implementation(compose.foundation)
+                    implementation(compose.material)
+                    @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                    implementation(compose.components.resources)
+                }
             }
         }
     }

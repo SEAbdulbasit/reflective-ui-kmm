@@ -1,4 +1,4 @@
-rootProject.name = "Transparent-UI"
+rootProject.name = "reflective-ui-kmm"
 
 include(":androidApp")
 include("webApp")

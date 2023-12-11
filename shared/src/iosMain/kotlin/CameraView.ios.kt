@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.interop.UIKitView
 import kotlinx.cinterop.CValue
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ObjCAction
 import platform.AVFoundation.*
 import platform.AVFoundation.AVCaptureDeviceDiscoverySession.Companion.discoverySessionWithDeviceTypes
@@ -103,6 +104,7 @@ private fun BoxScope.AuthorizedCamera() {
     }
 }
 
+@OptIn(ExperimentalForeignApi::class)
 @Composable
 private fun BoxScope.RealDeviceCamera(
     camera: AVCaptureDevice,
@@ -119,7 +121,6 @@ private fun BoxScope.RealDeviceCamera(
             requestWhenInUseAuthorization()
         }
     }
-    var capturePhotoStarted by remember { mutableStateOf(false) }
     val captureSession: AVCaptureSession = remember {
         AVCaptureSession().also { captureSession ->
             captureSession.sessionPreset = AVCaptureSessionPresetPhoto
