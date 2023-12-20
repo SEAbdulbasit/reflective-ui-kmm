@@ -14,12 +14,16 @@ The project currently uses the Canvas composable to draw circles and text with t
 
 ## Contributing
 
-Contributions and feedback are highly encouraged. If you have alternative approaches, optimizations, or improvements, feel free to create a pull request. Together, we can find the most effective and efficient way to implement transparent UI in Compose Multiplatform.
+Contributions and feedback are highly encouraged. If you have alternative approaches, optimizations, or improvements, feel free to create a pull request. Together, we can find the most effective and efficient way to implement a transparent UI in Compose Multiplatform.
 
 ## Example Screenshot
 
 ## Demo
 https://github.com/SEAbdulbasit/reflective-ui-kmm/assets/33172684/59bb18a5-4f87-4081-9e7a-039ef635ee9f
+
+
+## Live
+You can find live [here](https://seabdulbasit.github.io/reflective-ui-kmm/)
 
 
 
