@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reflective UI KMP App</title>
+    <script type="application/javascript" src="skiko.js"></script>
+    <script type="application/javascript" src="webApp.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            overflow: hidden;
+        }
+
+       #fullScreenElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index:0;
+}
+
+#ComposeTarget {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure it's above other elements */
+    /* Other styles for the canvas */
+}
+    </style>
+</head>
+<body>
+<div id="fullScreenElement"></div>
+<canvas id="ComposeTarget"></canvas>
+</body>
+</html>
